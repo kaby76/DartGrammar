@@ -67,4 +67,28 @@ abstract class DartLexerBase extends Lexer
       // the brace structure of some programs with syntax errors.
 	if (!braceLevels.empty()) braceLevels.pop();
     }
+    boolean braceLevelSingle()
+    {
+	return currentBraceLevel(BRACE_SINGLE);
+    }
+
+    boolean braceLevelNormal()
+    {
+	return currentBraceLevel(BRACE_NORMAL);
+    }
+
+    boolean braceLevelDouble()
+    {
+	return currentBraceLevel(BRACE_DOUBLE);
+    }
+
+    boolean braceLevelTriple()
+    {
+	return currentBraceLevel(BRACE_THREE_DOUBLE);
+    }
+
+    boolean braceLevelTripleSingle()
+    {
+	return currentBraceLevel(BRACE_THREE_DOUBLE);
+    }
 }

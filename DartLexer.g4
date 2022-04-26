@@ -482,13 +482,13 @@ SINGLE_LINE_STRING_SQ_BEGIN_MID
     ;
 
 SINGLE_LINE_STRING_SQ_MID_MID
-    :    { currentBraceLevel(BRACE_SINGLE) }?
+    :    { braceLevelSingle() }?
          { exitBrace(); } '}' STRING_CONTENT_SQ* '${'
          { enterBraceSingleQuote(); }
     ;
 
 SINGLE_LINE_STRING_SQ_MID_END
-    :    { currentBraceLevel(BRACE_SINGLE) }?
+    :    { braceLevelSingle() }?
          { exitBrace(); } '}' STRING_CONTENT_SQ* '\''
     ;
 
@@ -507,13 +507,13 @@ SINGLE_LINE_STRING_DQ_BEGIN_MID
     ;
 
 SINGLE_LINE_STRING_DQ_MID_MID
-    :    { currentBraceLevel(BRACE_DOUBLE) }?
+    :    { braceLevelDouble() }?
          { exitBrace(); } '}' STRING_CONTENT_DQ* '${'
          { enterBraceDoubleQuote(); }
     ;
 
 SINGLE_LINE_STRING_DQ_MID_END
-    :    { currentBraceLevel(BRACE_DOUBLE) }?
+    :    { braceLevelDouble() }?
          { exitBrace(); } '}' STRING_CONTENT_DQ* '"'
     ;
 
@@ -544,13 +544,13 @@ MULTI_LINE_STRING_SQ_BEGIN_MID
     ;
 
 MULTI_LINE_STRING_SQ_MID_MID
-    :    { currentBraceLevel(BRACE_THREE_SINGLE) }?
+    :    { braceLevelTripleSingle() }?
          { exitBrace(); } '}' STRING_CONTENT_TSQ* QUOTES_SQ '${'
          { enterBraceThreeSingleQuotes(); }
     ;
 
 MULTI_LINE_STRING_SQ_MID_END
-    :    { currentBraceLevel(BRACE_THREE_SINGLE) }?
+    :    { braceLevelTripleSingle() }?
          { exitBrace(); } '}' STRING_CONTENT_TSQ* '\'\'\''
     ;
 
@@ -580,13 +580,13 @@ MULTI_LINE_STRING_DQ_BEGIN_MID
     ;
 
 MULTI_LINE_STRING_DQ_MID_MID
-    :    { currentBraceLevel(BRACE_THREE_DOUBLE) }?
+    :    { braceLevelTriple() }?
          { exitBrace(); } '}' STRING_CONTENT_TDQ* QUOTES_DQ '${'
          { enterBraceThreeDoubleQuotes(); }
     ;
 
 MULTI_LINE_STRING_DQ_MID_END
-    :    { currentBraceLevel(BRACE_THREE_DOUBLE) }?
+    :    { braceLevelTriple() }?
          { exitBrace(); } '}' STRING_CONTENT_TDQ* '"""'
     ;
 
@@ -595,7 +595,7 @@ LBRACE
     ;
 
 RBRACE
-    :    { currentBraceLevel(BRACE_NORMAL) }? { exitBrace(); } '}'
+    :    { braceLevelNormal() }? { exitBrace(); } '}'
     ;
 
 fragment
